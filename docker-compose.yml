@@ -12,10 +12,18 @@ services:
       - /home/server/vw-data/:/data/
     labels:
       - "traefik.enable=true"
+      # Main HTTP service
       - "traefik.http.routers.vaultwarden.rule=Host(`warden.bobparsons.dev`)"
       - "traefik.http.routers.vaultwarden.entrypoints=https"
       - "traefik.http.routers.vaultwarden.tls.certresolver=letsencrypt"
-      - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
+      - "traefik.http.routers.vaultwarden.service=vaultwarden-svc"
+      - "traefik.http.services.vaultwarden-svc.loadbalancer.server.port=80"
+      # WebSocket service
+      - "traefik.http.routers.vaultwarden-ws.rule=Host(`warden.bobparsons.dev`) && (Path(`/notifications/hub`) || Path(`/notifications/hub/negotiate`))"
+      - "traefik.http.routers.vaultwarden-ws.entrypoints=https"
+      - "traefik.http.routers.vaultwarden-ws.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.vaultwarden-ws.service=vaultwarden-ws-svc"
+      - "traefik.http.services.vaultwarden-ws-svc.loadbalancer.server.port=3012"
 
 networks:
   traefik:
