@@ -10,7 +10,7 @@ services:
       DOMAIN: "https://warden.bobparsons.dev"
       ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
     volumes:
-      - /home/server/vw-data/:/data/
+      - /home/server/vaultwarden/vw-data/:/data/
     labels:
       - "traefik.enable=true"
       # Main HTTP service
