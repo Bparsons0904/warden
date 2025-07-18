@@ -12,15 +12,9 @@ steps:
     environment:
       VAULTWARDEN_ADMIN_TOKEN:
         from_secret: VAULTWARDEN_ADMIN_TOKEN
-    when:
-      branch:
-        - main
-      event:
-        - push
 
 trigger:
   branch:
     - main
   event:
     - push
-

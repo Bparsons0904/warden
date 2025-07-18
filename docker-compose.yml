@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     networks:
       - traefik
+      - vaultwarden
     environment:
       DOMAIN: "https://warden.bobparsons.dev"
       ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
@@ -28,3 +29,5 @@ services:
 networks:
   traefik:
     external: true
+  vaultwarden:
+    driver: bridge
