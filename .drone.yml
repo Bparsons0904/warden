@@ -4,11 +4,11 @@ name: vaultwarden-deploy
 
 steps:
   - name: deploy
-    image: docker/compose:latest
+    image: docker:latest
     commands:
-      - docker-compose down
-      - docker-compose pull
-      - docker-compose up -d
+      - docker compose down
+      - docker compose pull
+      - docker compose up -d
     environment:
       VAULTWARDEN_ADMIN_TOKEN:
         from_secret: VAULTWARDEN_ADMIN_TOKEN
