@@ -1,0 +1,30 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    networks:
+      - traefik
+    env_file:
+      - .env
+    environment:
+      DOMAIN: "https://warden.bobparsons.dev"
+      ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
+    volumes:
+      - /home/server/vw-data/:/data/
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vaultwarden.rule=Host(`warden.bobparsons.dev`)"
+      - "traefik.http.routers.vaultwarden.entrypoints=https"
+      - "traefik.http.routers.vaultwarden.tls.certresolver=letsencrypt"
+      - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
+
+      # WebSocket support
+      - "traefik.http.routers.vaultwarden-websocket.rule=Host(`warden.bobparsons.dev`) && Path(`/notifications/hub`)"
+      - "traefik.http.routers.vaultwarden-websocket.entrypoints=https"
+      - "traefik.http.routers.vaultwarden-websocket.tls.certresolver=letsencrypt"
+      - "traefik.http.services.vaultwarden-websocket.loadbalancer.server.port=3012"
+
+networks:
+  traefik:
+    external: true
