@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     networks:
       - traefik
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     environment:
       DOMAIN: "https://warden.bobparsons.dev"
       ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
