@@ -24,3 +24,7 @@ services:
       - "traefik.http.routers.vaultwarden-websocket.tls.certresolver=letsencrypt"
       - "traefik.http.routers.vaultwarden-websocket.service=vaultwarden-websocket"
       - "traefik.http.services.vaultwarden-websocket.loadbalancer.server.port=3012"
+
+networks:
+  traefik:
+    external: true
