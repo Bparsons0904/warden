@@ -9,9 +9,10 @@ steps:
       - docker compose down
       - docker compose pull
       - docker compose up -d
-    environment:
-      VAULTWARDEN_ADMIN_TOKEN:
-        from_secret: VAULTWARDEN_ADMIN_TOKEN
+
+    # environment:
+    #   VAULTWARDEN_ADMIN_TOKEN:
+    #     from_secret: VAULTWARDEN_ADMIN_TOKEN
 
 trigger:
   branch:
