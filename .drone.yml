@@ -9,9 +9,6 @@ steps:
       - docker-compose down
       - docker-compose pull
       - docker-compose up -d
-    volumes:
-      - name: docker-sock
-        path: /var/run/docker.sock
     environment:
       VAULTWARDEN_ADMIN_TOKEN:
         from_secret: VAULTWARDEN_ADMIN_TOKEN
@@ -20,11 +17,6 @@ steps:
         - main
       event:
         - push
-
-volumes:
-  - name: docker-sock
-    host:
-      path: /var/run/docker.sock
 
 trigger:
   branch:
