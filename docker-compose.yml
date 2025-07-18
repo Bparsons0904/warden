@@ -7,7 +7,7 @@ services:
       - traefik
       - vaultwarden
     env_file:
-      - .env
+      - /home/server/vaultwarden/.env
     environment:
       DOMAIN: "https://warden.bobparsons.dev"
       ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
